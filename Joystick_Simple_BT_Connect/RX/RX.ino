@@ -1,4 +1,4 @@
-#define BEEPER 9
+#define BUZZER 9
 void setup() {
   Serial.begin(115200); //啟用序列，速度115200 bps
 }
@@ -11,7 +11,7 @@ void loop() {
      data.trim();
     // Serial.print(data);
     if (data == "beep") {
-      tone(BEEPER,1000,500);
+      tone(BUZZER,1000,500);
       data="";
     }
   }

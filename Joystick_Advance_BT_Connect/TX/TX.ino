@@ -1,7 +1,7 @@
 /*
   ###CodeSummary###
-  作者:Jack
-  電子信箱:wwin3286tw@yahoo.com.tw
+  作者:河謝工程師
+  電子信箱:ejtx@arklab.tw
   日期：2019-01-07
   時間：16:42
   說明：遙控器範例程式碼，按下各別按鈕後由蜂鳴器能發出聲音
@@ -9,9 +9,9 @@
 
   ###Code Summary###
 */
-#define LEFT_BTN_1 2
-#define RIGHT_BTN_1 4
-#define BEEPER 9
+#define LEFT_BUMPER 2
+#define RIGHT_BUMPER 4
+#define BUZZER 9
 #define LEFT_VR_X A0
 #define LEFT_VR_Y A1
 #define RIGHT_VR_X A2
@@ -27,13 +27,14 @@
 #define RC_Hz 10
 #define RC_CMD_INTERVAl 1000/RC_Hz
 #define HIGH_ADC_Resoultion true
+
 unsigned long previousMillis = 0;
 void setup() {
   // put your setup code here,to run once:
   Serial.begin(115200);
   Serial.print(PACKET_STANDARD_HEADER);
-  pinMode(LEFT_BTN_1, INPUT);
-  pinMode(RIGHT_BTN_1, INPUT);
+  pinMode(LEFT_BUMPER, INPUT);
+  pinMode(RIGHT_BUMPER, INPUT);
   pinMode(ONE_PIN_BUTTON, INPUT);
 }
 void loop() {
@@ -45,8 +46,8 @@ void loop() {
     int rvx = analogRead(RIGHT_VR_X);
     int lvy = analogRead(LEFT_VR_Y);
     int rvy = analogRead(RIGHT_VR_Y);
-    int lb = digitalRead(LEFT_BTN_1);
-    int rb = digitalRead(RIGHT_BTN_1);
+    int lb = digitalRead(LEFT_BUMPER);
+    int rb = digitalRead(RIGHT_BUMPER);
     int opb = analogRead(ONE_PIN_BUTTON);
     if (HIGH_ADC_Resoultion & DEBUG_MODE) {
       Serial.print(PACKET_STANDARD_HEADER);
@@ -68,6 +69,7 @@ void loop() {
 
     } else if (HIGH_ADC_Resoultion & !DEBUG_MODE) {
       Serial.print(PACKET_STANDARD_HEADER);
+      Serial.write(0x07);
       SerialWrile2Byte(lvx);
       SerialWrile2Byte(lvy);
       SerialWrile2Byte(rvx);
@@ -80,6 +82,7 @@ void loop() {
 
     } else if (!HIGH_ADC_Resoultion & DEBUG_MODE) {
       Serial.print(PACKET_STANDARD_HEADER);
+      Serial.write(0x07);
       Serial.write(lvx);
       Serial.write(lvy);
       Serial.write(rvx);
