@@ -39,7 +39,7 @@ int getClickButton() {
   int button_id = 0;
   switch (val) {
     case 450 ... 470:
-      tone(BUZZER, 2000);
+      tone(BUZZER, 2000); //可自行在此取代此行，寫入想要寫的程式碼
       button_id = 1;
       break;
     case 400 ... 420:
@@ -49,35 +49,34 @@ int getClickButton() {
     case 330 ... 350:
       tone(BUZZER, 2000);
       button_id = 3;
-
       break;
     case 240 ... 260:
       tone(BUZZER, 2000);
       button_id = 4;
       break;
+	case 760 ... 780:
+      tone(BUZZER, 2000);
+      button_id = 5;
+      break;
+	case 675 ... 695:
+      tone(BUZZER, 2000);
+      button_id = 6;
+      break;
+	case 605 ... 625:
+      tone(BUZZER, 2000);
+      button_id = 7;
+      break;
     case 550 ... 570:
       tone(BUZZER, 2000);
       button_id = 8;
       break;
-    case 605 ... 625:
+	case 135 ... 155:
       tone(BUZZER, 2000);
-      button_id = 7;
-      break;
-    case 675 ... 695:
-      tone(BUZZER, 2000);
-      button_id = 6;
-      break;
-    case 760 ... 780:
-      tone(BUZZER, 2000);
-      button_id = 5;
+      button_id = 9;
       break;
     case 865 ... 885:
       tone(BUZZER, 2000);
       button_id = 10;
-      break;
-    case 135 ... 155:
-      tone(BUZZER, 2000);
-      button_id = 9;
       break;
     default:
       if (digitalRead(LEFT_BUMPER) == LOW) {
@@ -86,7 +85,6 @@ int getClickButton() {
       } else if (digitalRead(RIGHT_BUMPER) == LOW) {
         button_id = 12;
       } else {
-        // button_id = 0;
         noTone(BUZZER);
       }
       break;
